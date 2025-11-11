@@ -1,65 +1,101 @@
-import Image from "next/image";
+"use client";
+
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="relative flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 overflow-hidden">
+      {/* Animated Background Blobs */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.2, 1] }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute w-[600px] h-[600px] bg-indigo-400/40 rounded-full blur-3xl top-[-100px] left-[-150px]"
+      />
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.3, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute w-[500px] h-[500px] bg-pink-400/40 rounded-full blur-3xl bottom-[-150px] right-[-100px]"
+      />
+
+      {/* Center Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 flex flex-col items-center justify-center text-center bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl p-10 md:p-14 w-[90%] max-w-lg"
+      >
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          className="text-5xl font-extrabold text-white mb-4 tracking-tight"
+        >
+          Welcome to{" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-indigo-200 to-purple-200">
+            Next Auth App
+          </span>{" "}
+          ✨
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-gray-200/90 text-lg md:text-xl mb-10 max-w-md leading-relaxed"
+        >
+          Secure, elegant, and lightning-fast authentication powered by{" "}
+          <span className="text-white font-medium">Next.js</span> and{" "}
+          <span className="text-white font-medium">Tailwind CSS</span>.
+        </motion.p>
+
+        {/* Buttons */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="flex flex-col sm:flex-row gap-5 justify-center"
+        >
+          <motion.a
+            href="/login"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-gradient-to-r from-pink-500 to-indigo-500 text-white font-semibold px-8 py-3 rounded-xl shadow-md hover:from-pink-600 hover:to-indigo-600 transition-all duration-300"
+          >
+            Login
+          </motion.a>
+
+          <motion.a
+            href="/signup"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="border border-white/30 text-white font-semibold px-8 py-3 rounded-xl bg-white/10 hover:bg-white/20 transition-all duration-300"
+          >
+            Sign Up
+          </motion.a>
+        </motion.div>
+
+        {/* Decorative Divider */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="mt-10 h-[1px] w-2/3 bg-gradient-to-r from-transparent via-white/30 to-transparent"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+
+        {/* Footer Text */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="text-gray-300/70 text-sm mt-4"
+        >
+          Crafted with ❤️ using Next.js 15 & Tailwind CSS
+        </motion.p>
+      </motion.div>
     </div>
   );
 }
